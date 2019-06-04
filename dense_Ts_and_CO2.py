@@ -55,10 +55,10 @@ params.R_CO2 = pyrads.phys.CO2.R # non-condensible forcing component
 #N_press = 15       # for testing only!
 #dwavenr = 0.1     #  for testing only!
 
-N_press = 20       # 
+N_press = 18       # 
 wavenr_min = 0.1   # [cm^-1]
 wavenr_max = 3500. #
-dwavenr = 0.1     # 
+dwavenr = 0.1      # 
 
 Tstrat = 150.      # stratospheric temperature
 
@@ -66,6 +66,7 @@ Tstrat = 150.      # stratospheric temperature
 ## setup range of temperatures, and if/where output is saved to:
 Ts_vec = np.arange(250.,300.,2.)
 CO2_vec = np.logspace(-6,-1,30)
+CO2_vec = np.append(np.array([0]),CO2_vec)
 
 ### -----------------------------------
 ## MAIN LOOP
@@ -79,10 +80,10 @@ for Ts in Ts_vec:
     CO2_idx = 0
     for CO2_ppv in CO2_vec:
         
-        print "wavenr_min,wavenr_max,dwave [cm^-1] = %.4f,%.4f,%.4f" % (wavenr_min,wavenr_max,dwavenr)
-        print "N_press = %.1f" % N_press
-        print "Surface temperature = %.1f K" % Ts
-        print "CO2 abundance = %.6f ppv" % CO2_ppv
+        print("wavenr_min,wavenr_max,dwave [cm^-1] = {0},{1},{2}".format(wavenr_min,wavenr_max,dwavenr))
+        print("N_press = {0}".format(N_press))
+        print("Surface temperature = {0} K".format(Ts))
+        print("CO2 abundance = {0} ppv".format(CO2_ppv))
 
         # setup grid:
         g = pyrads.SetupGrids.make_grid( Ts,Tstrat,N_press,wavenr_min,wavenr_max,dwavenr,params, RH=params.RH )
